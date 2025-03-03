@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: word-analysis
+  labels:
+    app: word-analysis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: word-analysis
+  template:
+    metadata:
+      labels:
+        app: word-analysis
+    spec:
+      containers:
+      - name: word-analysis
+        image: word-analysis:latest
+        imagePullPolicy: Never
+        volumeMounts:
+        - name: data-volume
+          mountPath: /home/data
+      volumes:
+      - name: data-volume
+        hostPath:
+          path: C:\Users\AR\docker-assignment\data
+          type: Directory
